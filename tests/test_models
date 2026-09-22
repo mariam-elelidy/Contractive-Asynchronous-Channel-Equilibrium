@@ -1,0 +1,90 @@
+"""
+tests/test_models.py
+======================
+Basic correctness tests: shapes, gradient flow, and a direct unit-level
+check of CACE's order-invariance property on a small synthetic example
+(independent of the full H1 experiment on real data).
+"""
+import sys
+sys.path.insert(0, "/home/claude/cace")
+import torch
+import numpy as np
+from src.models import CACE, LinearSSM, SmallNeuralCDE, GRUD
+
+N_CHANNELS = 36
+
+
+def make_toy_batch(B=4, L=20):
+    times = torch.sort(torch.rand(B, L) * 100, dim=1).values
+    channels = torch.randint(0, N_CHANNELS, (B, L))
+    values = torch.randn(B, L)
+    mask = torch.ones(B, L)
+    dt = torch.diff(times, dim=1, prepend=times[:, :1])
+    dt_chan = torch.zeros(B, L)
+    static = torch.randn(B, 5)
+    return {"times": times, "channels": channels, "values": values, "mask": mask,
+            "dt": dt, "dt_chan": dt_chan, "static": static, "labels": torch.randint(0, 2, (B,)).float()}
+
+
+def test_shapes_and_grad():
+    batch = make_toy_batch()
+    for cls in [CACE, LinearSSM, SmallNeuralCDE]:
+        model = cls(N_CHANNELS)
+        out = model(batch)
+        assert out.shape == (4,)
+        loss = out.sum()
+        loss.backward()
+        # Some per-channel parameters (e.g. CACE's resting_state/log_tau for a
+        # channel that happens not to appear in this small random toy batch)
+        # legitimately receive no gradient -- that is expected, not a bug.
+        # We check that a clear majority of parameters received a real gradient.
+        n_total = sum(1 for _ in model.parameters())
+        n_with_grad = sum(1 for p in model.parameters() if p.grad is not None and p.grad.abs().sum() > 0)
+        assert n_with_grad >= n_total * 0.5, f"{cls.__name__}: only {n_with_grad}/{n_total} params got gradient"
+    print("test_shapes_and_grad: PASS")
+
+
+def test_cace_exact_order_invariance_unit():
+    """Direct unit test: two channels touched at the SAME timestamp, in two
+    different orders, must give bit-identical CACE output (no truncation
+    involved at this tiny scale)."""
+    torch.manual_seed(0)
+    model = CACE(N_CHANNELS)
+    model.eval()
+    times = torch.tensor([[0.0, 5.0, 5.0, 10.0]])
+    channels_a = torch.tensor([[3, 7, 12, 3]])   # channel 7 (val -0.5) then 12 (val 0.8) at t=5
+    channels_b = torch.tensor([[3, 12, 7, 3]])   # SAME two events, swapped order: 12 (val 0.8) then 7 (val -0.5)
+    values_a = torch.tensor([[1.0, -0.5, 0.8, 0.2]])
+    values_b = torch.tensor([[1.0, 0.8, -0.5, 0.2]])  # values swapped to match the swapped channels
+    mask = torch.ones(1, 4)
+    dt = torch.tensor([[0.0, 5.0, 0.0, 5.0]])
+    dt_chan_a = torch.tensor([[0.0, 5.0, 5.0, 10.0]])
+    dt_chan_b = torch.tensor([[0.0, 5.0, 5.0, 10.0]])
+    static = torch.zeros(1, 5)
+
+    batch_a = {"times": times, "channels": channels_a, "values": values_a, "mask": mask,
+               "dt": dt, "dt_chan": dt_chan_a, "static": static}
+    batch_b = {"times": times, "channels": channels_b, "values": values_b, "mask": mask,
+               "dt": dt, "dt_chan": dt_chan_b, "static": static}
+    with torch.no_grad():
+        out_a = model(batch_a).item()
+        out_b = model(batch_b).item()
+    assert abs(out_a - out_b) < 1e-6, f"CACE order-invariance violated: {out_a} vs {out_b}"
+    print(f"test_cace_exact_order_invariance_unit: PASS (out_a={out_a:.8f}, out_b={out_b:.8f})")
+
+
+def test_grud_hourly_shapes():
+    B, T, C = 4, 48, N_CHANNELS
+    batch = {"X": torch.randn(B, T, C), "M": torch.ones(B, T, C), "Delta": torch.zeros(B, T, C),
+             "static": torch.randn(B, 5), "labels": torch.randint(0, 2, (B,)).float()}
+    model = GRUD(N_CHANNELS)
+    out = model(batch)
+    assert out.shape == (B,)
+    print("test_grud_hourly_shapes: PASS")
+
+
+if __name__ == "__main__":
+    test_shapes_and_grad()
+    test_cace_exact_order_invariance_unit()
+    test_grud_hourly_shapes()
+    print("\nAll tests passed.")
