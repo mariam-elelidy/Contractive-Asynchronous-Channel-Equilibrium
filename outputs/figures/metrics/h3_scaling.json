@@ -1,0 +1,114 @@
+{
+  "CACE": {
+    "lengths": [
+      100,
+      200,
+      400,
+      800,
+      1600,
+      3200
+    ],
+    "times_sec": [
+      0.022454261779785156,
+      0.044310569763183594,
+      0.09196019172668457,
+      0.1931779384613037,
+      0.4387030601501465,
+      0.7527055740356445
+    ],
+    "peak_mem_mb": [
+      0.003584,
+      0.0035,
+      0.003564,
+      0.003564,
+      0.003564,
+      0.003564
+    ],
+    "per_step_ms": [
+      0.22454261779785156,
+      0.22155284881591797,
+      0.22990047931671143,
+      0.24147242307662964,
+      0.27418941259384155,
+      0.23522049188613892
+    ]
+  },
+  "LinearSSM": {
+    "lengths": [
+      100,
+      200,
+      400,
+      800,
+      1600,
+      3200
+    ],
+    "times_sec": [
+      0.009727001190185547,
+      0.019341707229614258,
+      0.03852987289428711,
+      0.07612442970275879,
+      0.15244293212890625,
+      0.306171178817749
+    ],
+    "peak_mem_mb": [
+      0.00232,
+      0.00232,
+      0.002384,
+      0.002384,
+      0.002384,
+      0.002384
+    ],
+    "per_step_ms": [
+      0.09727001190185547,
+      0.09670853614807129,
+      0.09632468223571777,
+      0.09515553712844849,
+      0.0952768325805664,
+      0.09567849338054657
+    ]
+  },
+  "SmallNeuralCDE": {
+    "lengths": [
+      100,
+      200,
+      400,
+      800,
+      1600,
+      3200
+    ],
+    "times_sec": [
+      0.0476384162902832,
+      0.09301376342773438,
+      0.18822288513183594,
+      0.3693554401397705,
+      0.7559499740600586,
+      1.5402731895446777
+    ],
+    "peak_mem_mb": [
+      0.002656,
+      0.002656,
+      0.00272,
+      0.00272,
+      0.00272,
+      0.00272
+    ],
+    "per_step_ms": [
+      0.47638416290283203,
+      0.4650688171386719,
+      0.47055721282958984,
+      0.46169430017471313,
+      0.4724687337875366,
+      0.4813353717327118
+    ]
+  },
+  "diagnosis": {
+    "verdict": "H3 AS PRE-REGISTERED IS FALSIFIED.",
+    "measured_scaling_exponents": {
+      "CACE": 1.01,
+      "LinearSSM": 1.0,
+      "SmallNeuralCDE": 1.0
+    },
+    "explanation": "All three implemented methods are already O(1)-per-step recurrent architectures (each processes one event with constant-size state update); none require re-scanning growing history. The pre-registered H3 hypothesis implicitly assumed a comparison against a method whose cost grows with context length beyond O(L) (e.g., a full-attention Transformer with a growing KV cache, O(L) or O(L^2) per query). No such baseline was included in this pilot (a disclosed CPU-feasibility scope decision, see PREREGISTRATION.md). Against the three baselines actually implemented, CACE shows no asymptotic compute advantage: all three scale linearly in total wall-clock time with sequence length, with CACE (0.22-0.27ms/event) roughly 2.3x SLOWER per event than the linear SSM (0.095-0.097ms/event) and faster than the Neural CDE (0.46-0.48ms/event, reflecting its multi-substep RK integration).",
+    "lesson": "H3 was under-specified relative to the actual baseline set chosen. A properly falsifiable version of this hypothesis requires a baseline whose per-query cost is NOT already O(1) in context length (e.g., full self-attention), which is listed as required future work rather than retrofitted here."
+  }
+}

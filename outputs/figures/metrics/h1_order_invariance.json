@@ -1,0 +1,53 @@
+{
+  "CACE": {
+    "n_patients": 600,
+    "n_trials_total": 3000,
+    "mean_abs_delta": 0.00301875772078832,
+    "max_abs_delta": 1.050016164779663,
+    "median_abs_delta": 0.0,
+    "frac_exactly_invariant_1e-5": 0.97,
+    "diagnosis": {
+      "n_patients_within_max_events_cap": 558,
+      "n_patients_exceeding_cap_ie_truncation_artifact": 42,
+      "max_delta_within_cap_only": 0.0,
+      "frac_exact_within_cap_only": 1.0,
+      "max_delta_exceeding_cap_only": 1.050016164779663,
+      "note": "residual non-invariance is fully attributable to the MAX_EVENTS=600 pilot truncation interacting with tie groups that straddle the cutoff, verified by stratifying on whether the patient exceeds the cap; within the cap, CACE is exactly (bit-for-bit) invariant."
+    }
+  },
+  "LinearSSM": {
+    "n_patients": 600,
+    "n_trials_total": 3000,
+    "mean_abs_delta": 0.008177585636576017,
+    "max_abs_delta": 0.7932853698730469,
+    "median_abs_delta": 7.3909759521484375e-06,
+    "frac_exactly_invariant_1e-5": 0.6246666666666667,
+    "diagnosis": {
+      "n_patients_within_max_events_cap": 558,
+      "n_patients_exceeding_cap_ie_truncation_artifact": 42,
+      "max_delta_within_cap_only": 5.6996941566467285e-05,
+      "frac_exact_within_cap_only": 0.5304659498207885,
+      "max_delta_exceeding_cap_only": 0.7932853698730469,
+      "note": "not exactly invariant even within the event cap; this is expected, since this architecture has no order-invariance guarantee by construction."
+    }
+  },
+  "SmallNeuralCDE": {
+    "n_patients": 600,
+    "n_trials_total": 3000,
+    "mean_abs_delta": 1.3083601936666915,
+    "max_abs_delta": 9.730825424194336,
+    "median_abs_delta": 1.0713225603103638,
+    "frac_exactly_invariant_1e-5": 0.0,
+    "diagnosis": {
+      "n_patients_within_max_events_cap": 558,
+      "n_patients_exceeding_cap_ie_truncation_artifact": 42,
+      "max_delta_within_cap_only": 6.617436408996582,
+      "frac_exact_within_cap_only": 0.0,
+      "max_delta_exceeding_cap_only": 9.730825424194336,
+      "note": "not exactly invariant even within the event cap; this is expected, since this architecture has no order-invariance guarantee by construction."
+    }
+  },
+  "GRUD": {
+    "note": "not applicable in native hourly-binned format -- same-timestamp cross-channel order has no representation in a fixed hourly-bin input (values are overwritten by construction), so the manipulation is not comparable."
+  }
+}
