@@ -1,0 +1,39 @@
+=== Training SmallNeuralCDE (lr=0.0003) ===
+  epoch  1/15 train_loss=1.1402 train_auroc=0.6520 val_loss=1.0778 val_auroc=0.7170
+  epoch  2/15 train_loss=1.0628 train_auroc=0.7270 val_loss=1.0963 val_auroc=0.7291
+  epoch  3/15 train_loss=1.0164 train_auroc=0.7565 val_loss=1.1720 val_auroc=0.7052
+  epoch  4/15 train_loss=0.9937 train_auroc=0.7660 val_loss=1.0278 val_auroc=0.7612
+  epoch  5/15 train_loss=0.9658 train_auroc=0.7914 val_loss=1.0355 val_auroc=0.7561
+  epoch  6/15 train_loss=0.9403 train_auroc=0.7984 val_loss=1.0425 val_auroc=0.7568
+  epoch  7/15 train_loss=0.9498 train_auroc=0.7923 val_loss=1.0210 val_auroc=0.7637
+  epoch  8/15 train_loss=0.9415 train_auroc=0.7993 val_loss=1.0356 val_auroc=0.7587
+  epoch  9/15 train_loss=0.9059 train_auroc=0.8210 val_loss=1.1504 val_auroc=0.7110
+  epoch 10/15 train_loss=0.9382 train_auroc=0.7980 val_loss=1.1061 val_auroc=0.7252
+  epoch 11/15 train_loss=0.9660 train_auroc=0.7929 val_loss=1.0860 val_auroc=0.7362
+  epoch 12/15 train_loss=0.9137 train_auroc=0.8178 val_loss=0.9818 val_auroc=0.7751
+  epoch 13/15 train_loss=0.8931 train_auroc=0.8272 val_loss=1.1056 val_auroc=0.7231
+  epoch 14/15 train_loss=0.9438 train_auroc=0.8165 val_loss=1.1549 val_auroc=0.7318
+  epoch 15/15 train_loss=0.9682 train_auroc=0.7980 val_loss=1.0536 val_auroc=0.7449
+  FINAL TEST: loss=1.1508 auroc=0.7403 auprc=0.3389 (train_time=1317.2s)
+=== Training GRUD (lr=0.001) ===
+  epoch  1/15 train_loss=1.1358 train_auroc=0.7039 val_loss=1.0404 val_auroc=0.8018
+  epoch  2/15 train_loss=0.9399 train_auroc=0.8186 val_loss=0.8447 val_auroc=0.8493
+  epoch  3/15 train_loss=0.8401 train_auroc=0.8464 val_loss=0.8272 val_auroc=0.8544
+  epoch  4/15 train_loss=0.7910 train_auroc=0.8654 val_loss=0.8105 val_auroc=0.8589
+  epoch  5/15 train_loss=0.7546 train_auroc=0.8778 val_loss=0.8025 val_auroc=0.8630
+  epoch  6/15 train_loss=0.7138 train_auroc=0.8913 val_loss=0.8109 val_auroc=0.8629
+  epoch  7/15 train_loss=0.6748 train_auroc=0.9032 val_loss=0.7972 val_auroc=0.8668
+  epoch  8/15 train_loss=0.6490 train_auroc=0.9104 val_loss=0.8103 val_auroc=0.8662
+  epoch  9/15 train_loss=0.6083 train_auroc=0.9210 val_loss=0.8238 val_auroc=0.8649
+  epoch 10/15 train_loss=0.5603 train_auroc=0.9336 val_loss=0.8442 val_auroc=0.8663
+  epoch 11/15 train_loss=0.5353 train_auroc=0.9392 val_loss=0.8529 val_auroc=0.8636
+  epoch 12/15 train_loss=0.4961 train_auroc=0.9470 val_loss=0.9044 val_auroc=0.8572
+  epoch 13/15 train_loss=0.4520 train_auroc=0.9558 val_loss=1.0180 val_auroc=0.8525
+  epoch 14/15 train_loss=0.4316 train_auroc=0.9594 val_loss=1.0187 val_auroc=0.8445
+  epoch 15/15 train_loss=0.3882 train_auroc=0.9662 val_loss=1.0757 val_auroc=0.8426
+  FINAL TEST: loss=1.3305 auroc=0.8051 auprc=0.4333 (train_time=64.6s)
+SAVED main_results.json
+SmallNeuralCDE   AUROC=0.7403 AUPRC=0.3389 params=39,585
+GRUD             AUROC=0.8051 AUPRC=0.4333 params=14,997
+CACE             AUROC=0.8208 AUPRC=0.4681 params=8,869
+LinearSSM        AUROC=0.7100 AUPRC=0.3179 params=8,769

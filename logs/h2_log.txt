@@ -1,0 +1,59 @@
+=== Dropout sweep ===
+  CACE             drop_frac=0.0 AUROC=0.8208
+  CACE             drop_frac=0.1 AUROC=0.8188
+  CACE             drop_frac=0.2 AUROC=0.8134
+  CACE             drop_frac=0.3 AUROC=0.8001
+  CACE             drop_frac=0.4 AUROC=0.7999
+  CACE             drop_frac=0.5 AUROC=0.8035
+  LinearSSM        drop_frac=0.0 AUROC=0.7100
+  LinearSSM        drop_frac=0.1 AUROC=0.6949
+  LinearSSM        drop_frac=0.2 AUROC=0.6888
+  LinearSSM        drop_frac=0.3 AUROC=0.6697
+  LinearSSM        drop_frac=0.4 AUROC=0.6541
+  LinearSSM        drop_frac=0.5 AUROC=0.6416
+  SmallNeuralCDE   drop_frac=0.0 AUROC=0.7403
+  SmallNeuralCDE   drop_frac=0.1 AUROC=0.7446
+  SmallNeuralCDE   drop_frac=0.2 AUROC=0.7353
+  SmallNeuralCDE   drop_frac=0.3 AUROC=0.7338
+  SmallNeuralCDE   drop_frac=0.4 AUROC=0.7063
+  SmallNeuralCDE   drop_frac=0.5 AUROC=0.6492
+  GRUD             drop_frac=0.0 AUROC=0.8051
+  GRUD             drop_frac=0.1 AUROC=0.8015
+  GRUD             drop_frac=0.2 AUROC=0.7946
+  GRUD             drop_frac=0.3 AUROC=0.7766
+  GRUD             drop_frac=0.4 AUROC=0.7666
+  GRUD             drop_frac=0.5 AUROC=0.7634
+=== Jitter sweep ===
+  CACE             jitter_std=   0min AUROC=0.8208
+  CACE             jitter_std=  15min AUROC=0.8201
+  CACE             jitter_std=  30min AUROC=0.8203
+  CACE             jitter_std=  60min AUROC=0.8220
+  CACE             jitter_std= 120min AUROC=0.8181
+  LinearSSM        jitter_std=   0min AUROC=0.7100
+  LinearSSM        jitter_std=  15min AUROC=0.7082
+  LinearSSM        jitter_std=  30min AUROC=0.7009
+  LinearSSM        jitter_std=  60min AUROC=0.6953
+  LinearSSM        jitter_std= 120min AUROC=0.6851
+  SmallNeuralCDE   jitter_std=   0min AUROC=0.7403
+  SmallNeuralCDE   jitter_std=  15min AUROC=0.5147
+  SmallNeuralCDE   jitter_std=  30min AUROC=0.5226
+  SmallNeuralCDE   jitter_std=  60min AUROC=0.5611
+  SmallNeuralCDE   jitter_std= 120min AUROC=0.5079
+  GRUD             jitter_std=   0min AUROC=0.8051
+  GRUD             jitter_std=  15min AUROC=0.8101
+  GRUD             jitter_std=  30min AUROC=0.8076
+  GRUD             jitter_std=  60min AUROC=0.7933
+  GRUD             jitter_std= 120min AUROC=0.7899
+Saved h2_robustness.json
+
+=== Relative degradation (dropout 0.0 -> 0.5) ===
+  CACE             AUROC 0.8208 -> 0.8035  relative_degradation=0.0210
+  LinearSSM        AUROC 0.7100 -> 0.6416  relative_degradation=0.0963
+  SmallNeuralCDE   AUROC 0.7403 -> 0.6492  relative_degradation=0.1232
+  GRUD             AUROC 0.8051 -> 0.7634  relative_degradation=0.0518
+
+=== Relative degradation (jitter 0 -> 120min) ===
+  CACE             AUROC 0.8208 -> 0.8181  relative_degradation=0.0032
+  LinearSSM        AUROC 0.7100 -> 0.6851  relative_degradation=0.0350
+  SmallNeuralCDE   AUROC 0.7403 -> 0.5079  relative_degradation=0.3139
+  GRUD             AUROC 0.8051 -> 0.7899  relative_degradation=0.0189

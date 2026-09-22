@@ -1,0 +1,47 @@
+600/600 test patients have >=1 same-timestamp tie group
+=== CACE ===
+  processed 100/600
+  processed 200/600
+  processed 300/600
+  processed 400/600
+  processed 500/600
+  processed 600/600
+{
+  "n_patients": 600,
+  "n_trials_total": 3000,
+  "mean_abs_delta": 0.00301875772078832,
+  "max_abs_delta": 1.050016164779663,
+  "median_abs_delta": 0.0,
+  "frac_exactly_invariant_1e-5": 0.97
+}
+=== LinearSSM ===
+  processed 100/600
+  processed 200/600
+  processed 300/600
+  processed 400/600
+  processed 500/600
+  processed 600/600
+{
+  "n_patients": 600,
+  "n_trials_total": 3000,
+  "mean_abs_delta": 0.008177585636576017,
+  "max_abs_delta": 0.7932853698730469,
+  "median_abs_delta": 7.3909759521484375e-06,
+  "frac_exactly_invariant_1e-5": 0.6246666666666667
+}
+=== SmallNeuralCDE ===
+  processed 100/600
+  processed 200/600
+  processed 300/600
+  processed 400/600
+  processed 500/600
+  processed 600/600
+{
+  "n_patients": 600,
+  "n_trials_total": 3000,
+  "mean_abs_delta": 1.3083601936666915,
+  "max_abs_delta": 9.730825424194336,
+  "median_abs_delta": 1.0713225603103638,
+  "frac_exactly_invariant_1e-5": 0.0
+}
+Saved h1_order_invariance.json

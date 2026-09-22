@@ -1,0 +1,24 @@
+CACE             L=  100 time=0.0225s peak_mem=0.00MB per_step=0.2245ms
+CACE             L=  200 time=0.0443s peak_mem=0.00MB per_step=0.2216ms
+CACE             L=  400 time=0.0920s peak_mem=0.00MB per_step=0.2299ms
+CACE             L=  800 time=0.1932s peak_mem=0.00MB per_step=0.2415ms
+CACE             L= 1600 time=0.4387s peak_mem=0.00MB per_step=0.2742ms
+CACE             L= 3200 time=0.7527s peak_mem=0.00MB per_step=0.2352ms
+LinearSSM        L=  100 time=0.0097s peak_mem=0.00MB per_step=0.0973ms
+LinearSSM        L=  200 time=0.0193s peak_mem=0.00MB per_step=0.0967ms
+LinearSSM        L=  400 time=0.0385s peak_mem=0.00MB per_step=0.0963ms
+LinearSSM        L=  800 time=0.0761s peak_mem=0.00MB per_step=0.0952ms
+LinearSSM        L= 1600 time=0.1524s peak_mem=0.00MB per_step=0.0953ms
+LinearSSM        L= 3200 time=0.3062s peak_mem=0.00MB per_step=0.0957ms
+SmallNeuralCDE   L=  100 time=0.0476s peak_mem=0.00MB per_step=0.4764ms
+SmallNeuralCDE   L=  200 time=0.0930s peak_mem=0.00MB per_step=0.4651ms
+SmallNeuralCDE   L=  400 time=0.1882s peak_mem=0.00MB per_step=0.4706ms
+SmallNeuralCDE   L=  800 time=0.3694s peak_mem=0.00MB per_step=0.4617ms
+SmallNeuralCDE   L= 1600 time=0.7559s peak_mem=0.00MB per_step=0.4725ms
+SmallNeuralCDE   L= 3200 time=1.5403s peak_mem=0.00MB per_step=0.4813ms
+Saved h3_scaling.json
+
+=== Per-step cost trend (should be ~flat if O(1)/step, growing if not) ===
+CACE             per_step_ms: ['0.2245', '0.2216', '0.2299', '0.2415', '0.2742', '0.2352']
+LinearSSM        per_step_ms: ['0.0973', '0.0967', '0.0963', '0.0952', '0.0953', '0.0957']
+SmallNeuralCDE   per_step_ms: ['0.4764', '0.4651', '0.4706', '0.4617', '0.4725', '0.4813']
